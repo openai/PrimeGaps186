@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+
+# formalization.yaml (v0.4): repo-root metadata for formalization projects.
+version: "v0.4"
+
+project:
+  name: "PrimeGaps186"
+  description: >-
+    A conditional Lean 4 formalization of the bound 186 for the liminf of
+    consecutive prime gaps, with a Python numerical certificate.
+  authors:
+    - "OpenAI"
+  license: "Apache-2.0"
+
+sources:
+  - title: "Improved Gaps Between Primes"
+    authors:
+      - "OpenAI"
+    type: "article"
+    location: "Theorem 1.1 and its proof of DHL[40,2]"
+    relationship: "formalizes"
+  - title: "Numerical certificate for prime gaps at most 186"
+    authors:
+      - "OpenAI"
+    type: "article"
+    relationship: "adapts"
+    note: "The numerical integral and cap bounds remain unproved Lean inputs."
+
+classification:
+  arxiv:
+    - "math.NT"
+  msc2020:
+    - "11N05"
+
+status:
+  scope: >-
+    Conditional formalization of the main results, assuming the rank-three
+    hyper-Kloosterman bound, the rank-two Kloosterman correlation bound,
+    and the physical integral and cap bounds.
+  main_results:
+    - declaration: "PrimeGap186.dhl_40_2"
+      file: "PrimeGaps186.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+        - "PrimeGap186.kloosterman3_bound"
+        - "PrimeGap186.kloosterman2_correlation_bound"
+        - "PrimeGap186.physical_integral_bounds"
+      comparator_config: "comparator/main.json"
+    - declaration: "PrimeGap186.primeGapLiminf_le_186"
+      file: "PrimeGaps186.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+        - "PrimeGap186.kloosterman3_bound"
+        - "PrimeGap186.kloosterman2_correlation_bound"
+        - "PrimeGap186.physical_integral_bounds"
+      comparator_config: "comparator/main.json"
+    - declaration: "PrimeGap186.infinite_two_prime_translates_admissibleTuple"
+      file: "PrimeGaps186.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+        - "PrimeGap186.kloosterman3_bound"
+        - "PrimeGap186.kloosterman2_correlation_bound"
+        - "PrimeGap186.physical_integral_bounds"
+      comparator_config: "comparator/main.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "GPT 6 Astra"
+      framework: "Codex"
+      tool_setup: >-
+        Lean 4 and mathlib, with Comparator, lean4export, Nanoda and Lean
+        kernel checks; Python, NumPy, python-flint and FLINT for the
+        numerical certificate.
+      prompting_notes: >-
+        Formalize the source statements faithfully, simplify the proofs,
+        and retain unproved finite-field and numerical inputs as explicit axioms.
+  notes: "Refined through human-guided edits and automated proof checks."
+
+review:
+  status: "self-assessed"
+  notes: >-
+    All three conditional proofs passed Comparator, Nanoda and Lean kernel checks.
+    No independent human semantic review. Whole-file sorry counts and a complete
+    auxiliary-declaration audit are not established; separate declaration lint
+    has not been run.
+
+alignment:
+  namespace: "PrimeGap186"
+  statements:
+    - source: "Theorem 1.1 (DHL[40,2])"
+      lean: "PrimeGap186.dhl_40_2"
+      module: "PrimeGaps186"
+      status: "proved-conditionally"
+    - source: "Theorem 1.1 (consecutive-prime gap liminf)"
+      lean: "PrimeGap186.primeGapLiminf_le_186"
+      module: "PrimeGaps186"
+      status: "proved-conditionally"
+    - source: "Proof of Theorem 1.1 (admissible 40-tuple of diameter 186)"
+      lean: "PrimeGap186.infinite_two_prime_translates_admissibleTuple"
+      module: "PrimeGaps186"
+      status: "proved-conditionally"
+
+acknowledgements: >-
+  Thank you to the contributors to FormalPantheon, PrimeNumberTheoremAnd
+  (PNT+), and Axiom Math's PrimeGapsLib for the declarations and proof
+  fragments adapted in this development.
+  We also thank the authors of Lean 4, mathlib, Lake, Comparator, lean4export,
+  nanoda, Python, NumPy, python-flint and FLINT.

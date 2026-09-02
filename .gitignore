@@ -1,0 +1,11 @@
+/.lake/
+*.olean
+*.ilean
+*.trace
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+# Default output of prime_gap_186_certificate.py.
+/prime_gap_186_fresh.json

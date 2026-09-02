@@ -1,0 +1,48 @@
+name = "primeGaps186"
+version = "0.1.0"
+keywords = ["math", "number-theory", "prime-gaps"]
+defaultTargets = ["PrimeGaps186"]
+fixedToolchain = true
+lintDriver = "batteries/runLinter"
+lintDriverArgs = ["--trace", "--no-build", "PrimeGaps186"]
+
+[leanOptions]
+autoImplicit = false
+linter.mathlibStandardSet = true
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "bbcd1968ee6950abe88b85dba6995da346c4b2a8"
+
+# Verification executables; build only when explicitly requested.
+[[require]]
+name = "Comparator"
+git = "https://github.com/leanprover/comparator.git"
+rev = "19e111e2141cf333c7daff0f64c5f24acc91dd2e"
+
+# Pin the exporter's revision directly as well as in the lock file.
+[[require]]
+name = "lean4export"
+scope = "leanprover"
+git = "https://github.com/leanprover/lean4export"
+rev = "cacf989bd75f608700820f6afc595f32e7a99a4d"
+
+[[lean_lib]]
+name = "PrimeGaps186"
+roots = ["PrimeGaps186"]
+globs = ["PrimeGaps186"]
+
+[lean_lib.leanOptions]
+warningAsError = true
+
+# Comparator specification only: never imported by the proof or built by default.
+# Its intentional sorry placeholders are not part of the main quality gate.
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+globs = ["Challenge"]
+
+[lean_lib.leanOptions]
+warningAsError = false

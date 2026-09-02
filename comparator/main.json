@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "PrimeGaps186",
+  "theorem_names": [
+    "PrimeGap186.dhl_40_2",
+    "PrimeGap186.infinite_two_prime_translates_admissibleTuple",
+    "PrimeGap186.primeGapLiminf_le_186"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice",
+    "PrimeGap186.kloosterman3_bound",
+    "PrimeGap186.kloosterman2_correlation_bound",
+    "PrimeGap186.physical_integral_bounds"
+  ],
+  "enable_nanoda": true
+}
